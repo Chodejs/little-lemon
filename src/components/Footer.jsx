@@ -1,28 +1,26 @@
 export default function Footer() {
-    // Emma's Styling Notes:
-    // A dark, robust footer to ground the whole page. 
-    // We are using flex-wrap so it automatically stacks nicely on smaller screens!
+    
     const footerStyles = {
-        backgroundColor: '#495E57', // Classic Little Lemon green
+        backgroundColor: '#495E57',
         color: '#EDEFEE',
         display: 'flex',
-        flexWrap: 'wrap', // Absolute lifesaver for mobile responsiveness
+        flexWrap: 'wrap',
         justifyContent: 'space-around',
         padding: '40px 20px',
         fontFamily: 'sans-serif',
-        marginTop: 'auto' // Pushes footer to the bottom if the page content is short
+        marginTop: 'auto'
     };
 
     const columnStyles = {
         display: 'flex',
         flexDirection: 'column',
         gap: '12px',
-        minWidth: '200px', // Stops columns from getting hilariously squashed
+        minWidth: '200px',
         marginBottom: '20px'
     };
 
     const headerStyles = {
-        color: '#F4CE14', // Yellow headers for a proper pop of contrast
+        color: '#F4CE14',
         fontSize: '20px',
         marginBottom: '10px',
         textTransform: 'uppercase',
@@ -40,14 +38,14 @@ export default function Footer() {
     return (
         <footer style={footerStyles}>
             <div style={columnStyles}>
-                {/* I added a cheeky white background to the logo so it pops against the dark green */}
-                <img 
-                    src="logo.svg" 
-                    alt="Little Lemon" 
+
+                <img
+                    src="logo.svg"
+                    alt="Little Lemon"
                     style={{ height: '70px', width: 'auto', backgroundColor: '#FFF', padding: '10px', borderRadius: '8px', alignSelf: 'flex-start' }} 
                 />
             </div>
-            
+
             <div style={columnStyles}>
                 <h4 style={headerStyles}>Doormat Nav</h4>
                 <a style={linkStyles} href="/">Home</a>

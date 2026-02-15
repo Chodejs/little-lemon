@@ -1,82 +1,39 @@
-import { useState } from "react";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Nav.css';
 
 export default function Nav() {
+    
+    const [menuOpen, setMenuOpen] = useState(false);
 
-    const [hoveredIndex, setHoveredIndex] = useState(null);
-
-    const pages = [
-        {
-            name: 'home',
-            link: '/'
-        },
-        {
-            name: 'about',
-            link: '/about'
-        },
-        {
-            name: 'menu',
-            link: '/menu'
-        },
-        {
-            name: 'reserve',
-            link: '/reserve'
-        }
-    ]
-
-    const navStyles = {
-        display: 'flex',
-        justifyContent: 'center',
-        backgroundColor: '#495E57', 
-        padding: '15px 0',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)' 
-    };
-
-    const ulStyles = {
-        display: 'flex',
-        listStyle: 'none',
-        margin: 0,
-        padding: 0,
-        gap: '40px'
-    };
-
-    const baseLiStyles = {
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-        fontSize: '18px',
-        fontFamily: 'sans-serif',
-        cursor: 'pointer',
-        letterSpacing: '1px',
-        padding: '5px 10px',
-        borderRadius: '5px',
-        transition: 'all 0.3s ease'
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
     };
 
     return (
-        <>
-            <nav style={navStyles}>
-                <ul style={ulStyles}>
-                    {pages.map((page, index) => {
-                        const isHovered = hoveredIndex === index;
+        <nav className="navbar">
+            {/* The Hamburger Icon */}
+            <div className="hamburger" onClick={toggleMenu}>
+                <div className="bar"></div>
+                <div className="bar"></div>
+                <div className="bar"></div>
+            </div>
 
-                        const dynamicStyles = {
-                            ...baseLiStyles,
-                            color: isHovered ? '#495E57' : '#F4CE14',
-                            backgroundColor: isHovered ? '#F4CE14' : 'transparent'
-                        }
-                        return (
-                            <li
-                                key={index}
-                                style={dynamicStyles}
-
-                                onMouseEnter={() => setHoveredIndex(index)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                            >
-                                {page.name}
-                            </li>
-                        )
-                    })}
-                </ul>
-            </nav>
-        </>
-    )
+            {/* The Navigation Links */}
+            <ul className={`nav-links ${menuOpen ? "visible" : ""}`}>
+                <li>
+                    <Link to="/" onClick={toggleMenu}>Home</Link>
+                </li>
+                <li>
+                    <a href="#about" onClick={toggleMenu}>About</a>
+                </li>
+                <li>
+                    <a href="#menu" onClick={toggleMenu}>Menu</a>
+                </li>
+                <li>
+                    <Link to="/reserve" onClick={toggleMenu}>Reservations</Link>
+                </li>
+            </ul>
+        </nav>
+    );
 }
