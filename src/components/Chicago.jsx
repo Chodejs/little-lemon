@@ -29,6 +29,7 @@ export default function Chicago() {
                     />
                     <img 
                         src="../Mario and Adrian b.JPG" 
+                        alt="Mario and Adrian cooking"
                         className={styles.imageTwoStyles} 
                     />
                 </div>

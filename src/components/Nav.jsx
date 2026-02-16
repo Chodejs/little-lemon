@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import styles from './Nav.module.css';
 
 export default function Nav() {
@@ -9,6 +10,7 @@ export default function Nav() {
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
+
 
     return (
         <nav className={styles.navbar}>
@@ -22,16 +24,16 @@ export default function Nav() {
             {/* The Navigation Links */}
             <ul className={styles.navLinks + `${menuOpen ? "visible" : ""}`}>
                 <li>
-                    <Link to="/" onClick={toggleMenu}>Home</Link>
+                    <Link to="/">Home</Link>
                 </li>
                 <li>
-                    <a href="#specials" onClick={toggleMenu}>Specials</a>
+                    <Link to="/#specials">Specials</Link>
                 </li>
                 <li>
-                    <a href="#reviews" onClick={toggleMenu}>Reviews</a>
+                    <Link to="/#reviews">Reviews</Link>
                 </li>
                 <li>
-                    <Link to="/reserve" onClick={toggleMenu}>Reservations</Link>
+                    <Link to="/reserve">Reservations</Link>
                 </li>
             </ul>
         </nav>

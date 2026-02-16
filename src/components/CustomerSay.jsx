@@ -36,7 +36,7 @@ export default function CustomersSay() {
 
 
     return (
-        <section className={styles.sectionStyles}>
+        <section id="reviews" className={styles.sectionStyles}>
             <div className={styles.containerStyles}>
                 <h2 className={styles.headingStyles}>What Our Customers Say</h2>
 
