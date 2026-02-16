@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from './BookingPage.module.css';
 import BookingForm from "./BookingForm";
 
-export default function BookingPage() {
+export default function BookingPage({ availableTimes, dispatch }) {
 
 const [step, setStep] = useState(1);
 
@@ -18,7 +18,7 @@ const [step, setStep] = useState(1);
 
     return (
         <>
-            <BookingForm />
+            <BookingForm availableTimes={availableTimes} dispatch={dispatch} />
         </>
     )
 

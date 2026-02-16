@@ -1,8 +1,21 @@
 import { useState } from "react";
 import styles from './BookingPage.module.css';
-export default function BookingForm() {
+
+export default function BookingForm({ availableTimes, dispatch }) {
 
 const [step, setStep] = useState(1);
+
+const [date, setDate] = useState("");
+const [time, setTime] = useState("");
+const [guests, setGuests] = useState(1);
+const [occasion, setOccasion] = useState("");
+
+const handleDateChange = (e) => {
+    const selectedDate = e.target.value;
+    setDate(selectedDate);
+
+    dispatch({type: 'UPDATE_TIMES', payload: selectedDate})
+};
 
     const handleNext = (e) => {
         e.preventDefault();
@@ -23,26 +36,39 @@ const [step, setStep] = useState(1);
                     <>
                         <h1 className={styles.headingStyles}>Reserve a Table</h1>
                         <form className={styles.formStyles} onSubmit={handleNext}>
-                            <label className={styles.labelStyles}>Date
-                                <input type="date" required className={styles.inputStyles} />
-                            </label>
+                            <label htmlFor="res-date" className={styles.labelStyles}>Choose date</label>
+                            <input 
+                                type="date" 
+                                id="res-date" 
+                                required 
+                                className={styles.inputStyles}
+                                value={date}
+                                onChange={handleDateChange}
+                            />
 
-                            <label className={styles.labelStyles}>Time
-                                <select required className={styles.inputStyles}>
+                            <label htmlFor="res-time" className={styles.labelStyles}>Time
+                                <select 
+                                    id="res-time" 
+                                    required 
+                                    className={styles.inputStyles}
+                                    value={time}
+                                    onChange={(e) => setTime(e.target.value)}
+                                >
                                     <option value="">Select a time</option>
-                                    <option value="17:00">17:00</option>
-                                    <option value="18:00">18:00</option>
-                                    <option value="19:00">19:00</option>
-                                    <option value="20:00">20:00</option>
+                                        {availableTimes.map((availableTime) => (
+                                            <option key={availableTime} value={availableTime}>
+                                                {availableTime}
+                                            </option>
+                                        ))}
                                 </select>
                             </label>
 
-                            <label className={styles.labelStyles}>Number of Guests
-                                <input type="number" min="1" max="10" required className={styles.inputStyles} placeholder="1" />
+                            <label htmlFor="res-guests" className={styles.labelStyles}>Number of Guests
+                                <input id="res-guests" type="number" min="1" max="10" required className={styles.inputStyles} placeholder="1" />
                             </label>
 
-                            <label className={styles.labelStyles}>Occasion
-                                <select required className={styles.inputStyles}>
+                            <label htmlFor="res-occassion" className={styles.labelStyles}>Occasion
+                                <select id="res-occassion" required className={styles.inputStyles}>
                                     <option value="">Select an occasion</option>
                                     <option value="Birthday">Birthday</option>
                                     <option value="Anniversary">Anniversary</option>
