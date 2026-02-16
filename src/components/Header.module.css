@@ -1,0 +1,14 @@
+.headerStyles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-bottom: 2px solid #edefee;
+}
+
+.logoStyles {
+    height: 65px;
+    width: auto;
+    display: block;
+}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Nav.css';
+import styles from './Nav.module.css';
 
 export default function Nav() {
     
@@ -11,24 +11,24 @@ export default function Nav() {
     };
 
     return (
-        <nav className="navbar">
+        <nav className={styles.navbar}>
             {/* The Hamburger Icon */}
-            <div className="hamburger" onClick={toggleMenu}>
-                <div className="bar"></div>
-                <div className="bar"></div>
-                <div className="bar"></div>
+            <div className={styles.hamburger} onClick={toggleMenu}>
+                <div className={styles.bar}></div>
+                <div className={styles.bar}></div>
+                <div className={styles.bar}></div>
             </div>
 
             {/* The Navigation Links */}
-            <ul className={`nav-links ${menuOpen ? "visible" : ""}`}>
+            <ul className={styles.navLinks + `${menuOpen ? "visible" : ""}`}>
                 <li>
                     <Link to="/" onClick={toggleMenu}>Home</Link>
                 </li>
                 <li>
-                    <a href="#about" onClick={toggleMenu}>About</a>
+                    <a href="#specials" onClick={toggleMenu}>Specials</a>
                 </li>
                 <li>
-                    <a href="#menu" onClick={toggleMenu}>Menu</a>
+                    <a href="#reviews" onClick={toggleMenu}>Reviews</a>
                 </li>
                 <li>
                     <Link to="/reserve" onClick={toggleMenu}>Reservations</Link>

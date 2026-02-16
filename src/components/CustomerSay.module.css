@@ -1,0 +1,74 @@
+
+
+.sectionStyles {
+    background-color: #EDEFEE;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.containerStyles {
+    max-width: 850px;
+    width: 100%;
+}
+
+.headingStyles {
+    text-align: center;
+    font-size: 40px;
+    color: #495E57;
+    margin-bottom: 40px;
+}
+
+.gridStyles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.cardStyles {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 25px;
+    flex: 1 1 200px;
+    max-width: 280px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.ratingStyles {
+    font-size: 18px;
+    margin: 0;
+}
+
+.profileContainerStyles {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.imageStyles {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nameStyles {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333333;
+    margin: 0;
+}
+
+.reviewTextStyles {
+    color: #495E57;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    font-style: italic;
+}

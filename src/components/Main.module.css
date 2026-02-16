@@ -1,0 +1,9 @@
+.mainStyles {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: sans-serif;
+        min-height: 70vh;
+        background-color: #EDEFEE;
+        padding: 20px;
+    };

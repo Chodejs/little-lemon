@@ -1,0 +1,164 @@
+
+.mainStyles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+    min-height: 70vh;
+    background-color: #EDEFEE;
+    padding: 20px;
+}
+
+.containerStyles {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.headingStyles {
+    color: #495E57;
+    text-align: center;
+    margin: 0 0 20px 0;
+    font-size: 28px;
+}
+
+.formStyles {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.labelStyles {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    color: #333333;
+    gap: 8px;
+}
+
+.inputStyles {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.textareaStyles {
+    /* Inherited from inputStyles */
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: inherit;
+    /* Unique to textarea */
+    resize: vertical;
+    min-height: 80px;
+}
+
+.buttonStyles {
+    background-color: #F4CE14;
+    color: #333333;
+    border: none;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.backButtonStyles {
+    /* Inherited from buttonStyles */
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    /* Overridden or Unique to backButton */
+    background-color: transparent;
+    border: 2px solid #495E57;
+    color: #495E57;
+    box-shadow: none;
+    margin-top: 0px;
+}
+
+/* mainStyles = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        fontFamily: 'sans-serif',
+        minHeight: '70vh',
+        backgroundColor: '#EDEFEE', 
+        padding: '20px'
+    };
+
+    const containerStyles = {
+        backgroundColor: '#FFFFFF',
+        borderRadius: '16px',
+        padding: '30px',
+        width: '100%',
+        maxWidth: '400px', 
+        boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+    };
+
+    const headingStyles = {
+        color: '#495E57', 
+        textAlign: 'center',
+        margin: '0 0 20px 0',
+        fontSize: '28px'
+    };
+
+    const formStyles = {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px' 
+    };
+
+    const labelStyles = {
+        display: 'flex',
+        flexDirection: 'column',
+        fontWeight: 'bold',
+        color: '#333333',
+        gap: '8px'
+    };
+
+    const inputStyles = {
+        padding: '12px',
+        borderRadius: '8px',
+        border: '1px solid #ccc',
+        fontSize: '16px',
+        fontFamily: 'inherit'
+    };
+
+    const textareaStyles = {
+        ...inputStyles,
+        resize: 'vertical',
+        minHeight: '80px'
+    };
+
+    const buttonStyles = {
+        backgroundColor: '#F4CE14', 
+        color: '#333333',
+        border: 'none',
+        borderRadius: '8px',
+        padding: '16px',
+        fontSize: '18px',
+        fontWeight: 'bold',
+        cursor: 'pointer',
+        marginTop: '10px',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.15)'
+    };
+
+    const backButtonStyles = {
+        ...buttonStyles,
+        backgroundColor: 'transparent',
+        border: '2px solid #495E57',
+        color: '#495E57',
+        boxShadow: 'none',
+        marginTop: '0px'
+    }; */

@@ -9,7 +9,7 @@
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.nav-links {
+.navLinks {
     display: flex;
     list-style: none;
     margin: 0;
@@ -17,7 +17,7 @@
     gap: 40px;
 }
 
-.nav-links li a {
+.navLinks li a {
     color: #F4CE14;
     font-weight: bold;
     text-transform: uppercase;
@@ -29,7 +29,7 @@
     transition: all 0.3s ease;
 }
 
-.nav-links li a:hover {
+.navLinks li a:hover {
     background-color: #F4CE14;
     color: #495E57;
 }
@@ -61,7 +61,7 @@
     }
 
     
-    .nav-links {
+    .navLinks {
         display: none; 
         flex-direction: column;
         position: absolute;
@@ -75,12 +75,12 @@
         z-index: 100;
     }
 
-    .nav-links li {
+    .navLinks li {
         margin: 15px 0;
     }
 
     /* When the React state flips to true, this class makes it appear */
-    .nav-links.visible {
+    .navLinks.visible {
         display: flex;
     }
 }

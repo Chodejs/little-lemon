@@ -1,0 +1,78 @@
+
+.sectionStyles {
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    background-color: #FFFFFF;
+}
+
+.containerStyles {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    max-width: 850px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.textColumnStyles {
+    flex: 1 1 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.titleStyles {
+    color: #495E57;
+    font-size: 56px;
+    margin: 0;
+    font-family: serif;
+    line-height: 1;
+}
+
+.subtitleStyles {
+    color: #333333;
+    font-size: 32px;
+    margin: 0;
+    font-family: serif;
+}
+
+.descStyles {
+    color: #333333;
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 10px 0 0 0;
+    max-width: 400px;
+}
+
+.imageColumnStyles {
+    flex: 1 1 350px;
+    position: relative;
+    height: 350px;
+    min-width: 300px;
+}
+
+.imageOneStyles {
+    width: 60%;
+    border-radius: 16px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+}
+
+.imageTwoStyles {
+    width: 60%;
+    border-radius: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+    border: 5px solid #FFFFFF;
+}
