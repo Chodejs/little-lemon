@@ -24,16 +24,16 @@ export default function Nav() {
             {/* The Navigation Links */}
             <ul className={`${styles.navLinks} ${menuOpen ? styles.visible : ""}`}>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/" onClick={toggleMenu}>Home</Link>
                 </li>
                 <li>
-                    <Link to="/#specials">Specials</Link>
+                    <Link to="/#specials" onClick={toggleMenu}>Specials</Link>
                 </li>
                 <li>
-                    <Link to="/#reviews">Reviews</Link>
+                    <Link to="/#reviews" onClick={toggleMenu}>Reviews</Link>
                 </li>
                 <li>
-                    <Link to="/reserve">Reservations</Link>
+                    <Link to="/reserve" onClick={toggleMenu}>Reservations</Link>
                 </li>
             </ul>
         </nav>
