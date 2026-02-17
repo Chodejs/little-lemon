@@ -1,21 +1,28 @@
 import { useState } from "react";
 import styles from './BookingPage.module.css';
+import { submitAPI } from '../api';
 
-export default function BookingForm({ availableTimes, dispatch }) {
+export default function BookingForm({ availableTimes, dispatch, bookings = [], setBookings }) {
 
-const [step, setStep] = useState(1);
+    const [step, setStep] = useState(1);
 
-const [date, setDate] = useState("");
-const [time, setTime] = useState("");
-const [guests, setGuests] = useState(1);
-const [occasion, setOccasion] = useState("");
+    const [date, setDate] = useState("");
+    const [time, setTime] = useState("");
+    const [guests, setGuests] = useState(1);
+    const [occasion, setOccasion] = useState("");
 
-const handleDateChange = (e) => {
-    const selectedDate = e.target.value;
-    setDate(selectedDate);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [requests, setRequests] = useState("");
 
-    dispatch({type: 'UPDATE_TIMES', payload: selectedDate})
-};
+    const handleDateChange = (e) => {
+        const selectedDate = e.target.value;
+        setDate(selectedDate);
+
+        dispatch({type: 'UPDATE_TIMES', payload: selectedDate})
+    };
 
     const handleNext = (e) => {
         e.preventDefault();
@@ -24,8 +31,26 @@ const handleDateChange = (e) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setStep(3);
+        
+        const formData = {
+            date, time, guests, occasion,
+            firstName, lastName, email, phone, requests
+        };
+
+        // Call the global submitAPI. It returns true if it works!
+        const isSubmitted = submitAPI(formData);
+
+        if (isSubmitted) {
+            setBookings([...bookings, formData]);
+            setStep(3);
+        } else {
+            console.error("Oh My Goodness, Child! The submission failed.");
+        }
     };
+
+    const filteredTimes = availableTimes?.filter(
+        (t) => !bookings?.some((b) => b.date === date && b.time === t)
+    );
 
     return (
         <main className={styles.mainStyles}>
@@ -55,20 +80,36 @@ const handleDateChange = (e) => {
                                     onChange={(e) => setTime(e.target.value)}
                                 >
                                     <option value="">Select a time</option>
-                                        {availableTimes.map((availableTime) => (
-                                            <option key={availableTime} value={availableTime}>
-                                                {availableTime}
+                                        {filteredTimes?.map((t) => (
+                                            <option key={t} value={t}>
+                                                {t}
                                             </option>
                                         ))}
                                 </select>
                             </label>
 
                             <label htmlFor="res-guests" className={styles.labelStyles}>Number of Guests
-                                <input id="res-guests" type="number" min="1" max="10" required className={styles.inputStyles} placeholder="1" />
+                                <input 
+                                    id="res-guests" 
+                                    type="number" 
+                                    min="1" 
+                                    max="10" 
+                                    required 
+                                    className={styles.inputStyles} 
+                                    placeholder="1"
+                                    value={guests}
+                                    onChange={(e) => setGuests(e.target.value)} 
+                                />
                             </label>
 
                             <label htmlFor="res-occassion" className={styles.labelStyles}>Occasion
-                                <select id="res-occassion" required className={styles.inputStyles}>
+                                <select 
+                                    id="res-occassion" 
+                                    required 
+                                    className={styles.inputStyles}
+                                    value={occasion}
+                                    onChange={(e) => setOccasion(e.target.value)}
+                                >
                                     <option value="">Select an occasion</option>
                                     <option value="Birthday">Birthday</option>
                                     <option value="Anniversary">Anniversary</option>
@@ -87,23 +128,23 @@ const handleDateChange = (e) => {
                         <h1 className={styles.headingStyles}>Almost There!</h1>
                         <form className={styles.formStyles} onSubmit={handleSubmit}>
                             <label className={styles.labelStyles}>First Name
-                                <input type="text" required className={styles.inputStyles} placeholder="e.g. John" />
+                                <input type="text" required className={styles.inputStyles} placeholder="e.g. John" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                             </label>
 
                             <label className={styles.labelStyles}>Last Name
-                                <input type="text" required className={styles.inputStyles} placeholder="e.g. Doe" />
+                                <input type="text" required className={styles.inputStyles} placeholder="e.g. Doe" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                             </label>
 
                             <label className={styles.labelStyles}>Email Address
-                                <input type="email" required className={styles.inputStyles} placeholder="john@example.com" />
+                                <input type="email" required className={styles.inputStyles} placeholder="john@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                             </label>
 
                             <label className={styles.labelStyles}>Phone Number
-                                <input type="tel" required className={styles.inputStyles} placeholder="(555) 123-4567" />
+                                <input type="tel" required className={styles.inputStyles} placeholder="(555) 123-4567" value={phone} onChange={(e) => setPhone(e.target.value)} />
                             </label>
 
                             <label className={styles.labelStyles}>Special Requests
-                                <textarea className={styles.textareaStyles} placeholder="Allergies, seating preferences, etc."></textarea>
+                                <textarea className={styles.textareaStyles} placeholder="Allergies, seating preferences, etc." value={requests} onChange={(e) => setRequests(e.target.value)}></textarea>
                             </label>
 
                             <button type="submit" className={styles.buttonStyles}>Complete Reservation</button>
@@ -123,7 +164,11 @@ const handleDateChange = (e) => {
                         <button 
                             className={styles.buttonStyles}
                             style={{ backgroundColor: '#495E57', color: '#FFF'}} 
-                            onClick={() => setStep(1)}
+                            onClick={() => {
+                                // Optional, but resetting the step to 1 lets them book again cleanly. 
+                                // To be totally flawless, you'd reset the state variables here too!
+                                setStep(1); 
+                            }}
                         >
                             Make Another Booking
                         </button>
@@ -133,5 +178,4 @@ const handleDateChange = (e) => {
             </div>
         </main>
     )
-
 }

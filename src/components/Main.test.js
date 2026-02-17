@@ -1,17 +1,27 @@
 import { initializeTimes, updateTimes } from './Main';
 
-// Test 1: Checking our initial state function
-test('initializeTimes returns the correct expected array of times', () => {
-    const expectedTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+// verify that fetchAPI successfully returns a non-empty array for today's date
+test('initializeTimes returns a non-empty array of available booking times', () => {
     const result = initializeTimes();
-    expect(result).toEqual(expectedTimes);
+    
+    // We expect the result to actually be an array
+    expect(Array.isArray(result)).toBe(true);
+    // And we expect it to have at least one time slot inside it
+    expect(result.length).toBeGreaterThan(0);
 });
 
-// Test 2: Checking our reducer function
-test('updateTimes returns the identical state provided to it', () => {
-    const initialState = ["17:00", "18:00", "19:00"];
-    const action = { type: 'UPDATE_TIMES', payload: '2026-02-16' };
+// verify that the reducer successfully fetches a new, non-empty array from the API.
+test('updateTimes returns a non-empty array of times when a date is dispatched', () => {
+    // This is the state before the user changes the date
+    const initialState = ["17:00", "18:00", "19:00"]; 
+    
+    // The user selects a new date from the form
+    const action = { type: 'UPDATE_TIMES', payload: '2026-02-16' }; 
+    
+    // run the reducer
     const result = updateTimes(initialState, action);
     
-    expect(result).toEqual(initialState);
+    // Check that the API handed back a proper array of new times
+    expect(Array.isArray(result)).toBe(true);
+    expect(result.length).toBeGreaterThan(0);
 });
