@@ -22,7 +22,7 @@ export default function Nav() {
             </div>
 
             {/* The Navigation Links */}
-            <ul className={styles.navLinks + `${menuOpen ? "visible" : ""}`}>
+            <ul className={`${styles.navLinks} ${menuOpen ? styles.visible : ""}`}>
                 <li>
                     <Link to="/">Home</Link>
                 </li>

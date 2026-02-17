@@ -20,7 +20,6 @@ export default function BookingForm({ availableTimes, dispatch, bookings = [], s
     const handleDateChange = (e) => {
         const selectedDate = e.target.value;
         setDate(selectedDate);
-
         dispatch({type: 'UPDATE_TIMES', payload: selectedDate})
     };
 
@@ -37,20 +36,22 @@ export default function BookingForm({ availableTimes, dispatch, bookings = [], s
             firstName, lastName, email, phone, requests
         };
 
-        // Call the global submitAPI. It returns true if it works!
         const isSubmitted = submitAPI(formData);
 
         if (isSubmitted) {
             setBookings([...bookings, formData]);
-            setStep(3);
+            setStep(3); 
         } else {
-            console.error("Oh My Goodness, Child! The submission failed.");
+            console.error("Blimey! The submission failed.");
         }
     };
 
     const filteredTimes = availableTimes?.filter(
         (t) => !bookings?.some((b) => b.date === date && b.time === t)
     );
+
+    const isStep1Valid = date !== "" && time !== "" && guests >= 1 && guests <= 10 && occasion !== "";
+    const isStep2Valid = firstName !== "" && lastName !== "" && email !== "" && phone !== "";
 
     return (
         <main className={styles.mainStyles}>
@@ -61,6 +62,7 @@ export default function BookingForm({ availableTimes, dispatch, bookings = [], s
                     <>
                         <h1 className={styles.headingStyles}>Reserve a Table</h1>
                         <form className={styles.formStyles} onSubmit={handleNext}>
+                            
                             <label htmlFor="res-date" className={styles.labelStyles}>Choose date</label>
                             <input 
                                 type="date" 
@@ -71,53 +73,58 @@ export default function BookingForm({ availableTimes, dispatch, bookings = [], s
                                 onChange={handleDateChange}
                             />
 
-                            <label htmlFor="res-time" className={styles.labelStyles}>Time
-                                <select 
-                                    id="res-time" 
-                                    required 
-                                    className={styles.inputStyles}
-                                    value={time}
-                                    onChange={(e) => setTime(e.target.value)}
-                                >
-                                    <option value="">Select a time</option>
-                                        {filteredTimes?.map((t) => (
-                                            <option key={t} value={t}>
-                                                {t}
-                                            </option>
-                                        ))}
-                                </select>
-                            </label>
+                            <label htmlFor="res-time" className={styles.labelStyles}>Time</label>
+                            <select 
+                                id="res-time" 
+                                required 
+                                className={styles.inputStyles}
+                                value={time}
+                                onChange={(e) => setTime(e.target.value)}
+                            >
+                                <option value="">Select a time</option>
+                                    {filteredTimes?.map((t) => (
+                                        <option key={t} value={t}>
+                                            {t}
+                                        </option>
+                                    ))}
+                            </select>
 
-                            <label htmlFor="res-guests" className={styles.labelStyles}>Number of Guests
-                                <input 
-                                    id="res-guests" 
-                                    type="number" 
-                                    min="1" 
-                                    max="10" 
-                                    required 
-                                    className={styles.inputStyles} 
-                                    placeholder="1"
-                                    value={guests}
-                                    onChange={(e) => setGuests(e.target.value)} 
-                                />
-                            </label>
+                            <label htmlFor="res-guests" className={styles.labelStyles}>Number of Guests</label>
+                            <input 
+                                id="res-guests" 
+                                type="number" 
+                                min="1" 
+                                max="10" 
+                                required 
+                                className={styles.inputStyles} 
+                                placeholder="1"
+                                value={guests}
+                                onChange={(e) => setGuests(e.target.value)} 
+                            />
 
-                            <label htmlFor="res-occassion" className={styles.labelStyles}>Occasion
-                                <select 
-                                    id="res-occassion" 
-                                    required 
-                                    className={styles.inputStyles}
-                                    value={occasion}
-                                    onChange={(e) => setOccasion(e.target.value)}
-                                >
-                                    <option value="">Select an occasion</option>
-                                    <option value="Birthday">Birthday</option>
-                                    <option value="Anniversary">Anniversary</option>
-                                    <option value="Other">Just a standard nosh</option>
-                                </select>
-                            </label>
+                            <label htmlFor="res-occassion" className={styles.labelStyles}>Occasion</label>
+                            <select 
+                                id="res-occassion" 
+                                required 
+                                className={styles.inputStyles}
+                                value={occasion}
+                                onChange={(e) => setOccasion(e.target.value)}
+                            >
+                                <option value="">Select an occasion</option>
+                                <option value="Birthday">Birthday</option>
+                                <option value="Anniversary">Anniversary</option>
+                                <option value="Other">Just a standard nosh</option>
+                            </select>
 
-                            <button type="submit" className={styles.buttonStyles}>Next: Your Details</button>
+                            <button 
+                                type="submit" 
+                                className={styles.buttonStyles}
+                                disabled={!isStep1Valid}
+                                aria-label="On Click"
+                                style={!isStep1Valid ? { backgroundColor: '#ccc', cursor: 'not-allowed' } : {}}
+                            >
+                                Next: Your Details
+                            </button>
                         </form>
                     </>
                 )}
@@ -127,28 +134,41 @@ export default function BookingForm({ availableTimes, dispatch, bookings = [], s
                     <>
                         <h1 className={styles.headingStyles}>Almost There!</h1>
                         <form className={styles.formStyles} onSubmit={handleSubmit}>
-                            <label className={styles.labelStyles}>First Name
-                                <input type="text" required className={styles.inputStyles} placeholder="e.g. John" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                            </label>
+                            
+                            {/* EMMA'S NOTE: Step 2 also gets the un-nested htmlFor/id treatment */}
+                            <label htmlFor="firstName" className={styles.labelStyles}>First Name</label>
+                            <input id="firstName" type="text" required minLength="2" className={styles.inputStyles} placeholder="e.g. John" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
 
-                            <label className={styles.labelStyles}>Last Name
-                                <input type="text" required className={styles.inputStyles} placeholder="e.g. Doe" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                            </label>
+                            <label htmlFor="lastName" className={styles.labelStyles}>Last Name</label>
+                            <input id="lastName" type="text" required minLength="2" className={styles.inputStyles} placeholder="e.g. Doe" value={lastName} onChange={(e) => setLastName(e.target.value)} />
 
-                            <label className={styles.labelStyles}>Email Address
-                                <input type="email" required className={styles.inputStyles} placeholder="john@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            </label>
+                            <label htmlFor="email" className={styles.labelStyles}>Email Address</label>
+                            <input id="email" type="email" required className={styles.inputStyles} placeholder="john@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
 
-                            <label className={styles.labelStyles}>Phone Number
-                                <input type="tel" required className={styles.inputStyles} placeholder="(555) 123-4567" value={phone} onChange={(e) => setPhone(e.target.value)} />
-                            </label>
+                            <label htmlFor="phone" className={styles.labelStyles}>Phone Number</label>
+                            <input id="phone" type="tel" required className={styles.inputStyles} placeholder="(555) 123-4567" value={phone} onChange={(e) => setPhone(e.target.value)} />
 
-                            <label className={styles.labelStyles}>Special Requests
-                                <textarea className={styles.textareaStyles} placeholder="Allergies, seating preferences, etc." value={requests} onChange={(e) => setRequests(e.target.value)}></textarea>
-                            </label>
+                            <label htmlFor="requests" className={styles.labelStyles}>Special Requests</label>
+                            <textarea id="requests" className={styles.textareaStyles} placeholder="Allergies, seating preferences, etc." value={requests} onChange={(e) => setRequests(e.target.value)}></textarea>
 
-                            <button type="submit" className={styles.buttonStyles}>Complete Reservation</button>
-                            <button type="button" className={styles.backButtonStyles} onClick={() => setStep(1)}>Go Back</button>
+                            <button 
+                                type="submit" 
+                                className={styles.buttonStyles}
+                                disabled={!isStep2Valid}
+                                aria-label="On Click"
+                                style={!isStep2Valid ? { backgroundColor: '#ccc', cursor: 'not-allowed' } : {}}
+                            >
+                                Complete Reservation
+                            </button>
+                            
+                            <button 
+                                type="button" 
+                                className={styles.backButtonStyles} 
+                                aria-label="On Click"
+                                onClick={() => setStep(1)}
+                            >
+                                Go Back
+                            </button>
                         </form>
                     </>
                 )}
@@ -164,10 +184,11 @@ export default function BookingForm({ availableTimes, dispatch, bookings = [], s
                         <button 
                             className={styles.buttonStyles}
                             style={{ backgroundColor: '#495E57', color: '#FFF'}} 
+                            aria-label="On Click"
                             onClick={() => {
-                                // Optional, but resetting the step to 1 lets them book again cleanly. 
-                                // To be totally flawless, you'd reset the state variables here too!
                                 setStep(1); 
+                                setDate(""); setTime(""); setGuests(1); setOccasion("");
+                                setFirstName(""); setLastName(""); setEmail(""); setPhone(""); setRequests("");
                             }}
                         >
                             Make Another Booking

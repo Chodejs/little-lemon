@@ -40,8 +40,9 @@
 }
 
 .footerImage { 
-    height: 200px;
-    width: auto;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
     background-color: #FFF;
     padding: 10px;
     border-radius: 8px;
